@@ -1,22 +1,37 @@
-// create web server
-// run server: node comments.js
-// open browser: http://localhost:3000/comments.html
-// web server will return comments.html file
-// web server will return comments.json file
+// Create web server
+// localhost:3000/comments
+// localhost:3000/comments/1
+// localhost:3000/comments/2
+// localhost:3000/comments/3
 
-var http = require('http');
-var fs = require('fs');
+// 1. Create web server
+// 2. Create route
+// 3. Create controller
+// 4. Create view
 
-// create web server
-var server = http.createServer(function (req, res) {
-  console.log('request was made: ' + req.url);
-  // set content type
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  // read file from file system
-  var myReadStream = fs.createReadStream(__dirname + '/comments.html', 'utf8');
-  // send response to browser
-  myReadStream.pipe(res);
+// 1. Create web server
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// 2. Create route
+// 3. Create controller
+// 4. Create view
+app.get('/', (req, res) => {
+    // res.send('Hello World!');
+    res.render('home');
 });
 
-// listen to port
-server.listen(3000, '
+app.get('/comments', (req, res) => {
+    // res.send('Hello World!');
+    res.render('comments/index');
+});
+
+app.get('/comments/:id', (req, res) => {
+    // res.send('Hello World!');
+    res.render('comments/view');
+});
+
+app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+});
